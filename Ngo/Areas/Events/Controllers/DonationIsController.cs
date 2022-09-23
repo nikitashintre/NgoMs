@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Ngo.Models;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
+    [Authorize]
     public class DonationIsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -47,9 +49,21 @@ namespace Ngo.Areas.Events.Controllers
         }
 
         // GET: Events/DonationIs/Create
-        public IActionResult Create()
+        //public IActionResult Create()
+        //{
+        //    ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
+        //    return View();
+        //}
+
+        public IActionResult Create(int id)
         {
-            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
+            //DonationI donation = new DonationI();
+           
+                var Camp = _context.Campaigns.SingleOrDefault(c => c.CamaignId == id);
+                ViewBag.CampaignId = Camp.CamaignId;
+                ViewBag.CampaignName = Camp.CampaignName;
+                //ViewData["CampaignId"] = new SelectList(Camp, "CampaignId", "CampaignName");
+            //ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
             return View();
         }
 
@@ -66,7 +80,7 @@ namespace Ngo.Areas.Events.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName", donationI.CampaignId);
+            //ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName", donationI.CampaignId);
             return View(donationI);
         }
 

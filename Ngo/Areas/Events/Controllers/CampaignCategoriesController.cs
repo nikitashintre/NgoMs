@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Ngo.Data;
 using Ngo.Models;
 
@@ -14,10 +15,12 @@ namespace Ngo.Areas.Events.Controllers
     public class CampaignCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<CampaignCategory> _logger;
 
-        public CampaignCategoriesController(ApplicationDbContext context)
+        public CampaignCategoriesController(ApplicationDbContext context, ILogger<CampaignCategory> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: Events/CampaignCategories
@@ -57,10 +60,21 @@ namespace Ngo.Areas.Events.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryId,CategoryName")] CampaignCategory campaignCategory)
         {
+            // Sanitize the data
+            campaignCategory.CategoryName = campaignCategory.CategoryName.Trim();
+
+            // Validation Checks - Server-side validation
+            bool duplicateExists = _context.CampaignCategories.Any(c => c.CategoryName ==campaignCategory.CategoryName);
+            if (duplicateExists)
+            {
+                ModelState.AddModelError("CategoryName", "Duplicate Category Found!");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(campaignCategory);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation($"Created a New Category: ID = {campaignCategory.CategoryId} !");
                 return RedirectToAction(nameof(Index));
             }
             return View(campaignCategory);

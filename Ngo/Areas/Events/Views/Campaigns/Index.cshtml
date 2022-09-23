@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Ngo.Models.Campaign>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,7 +10,50 @@
 <p>
     <a class="button btn-sm btn-danger" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*@{
+    var i=1;
+    var donation = Ngo.Models.DonationI;
+
+}*@
+@foreach(var item in Model){
+    @*int count;
+    @foreach (var itemm in donation)
+    {
+        @if (itemm.CamaignId == i)
+        {
+             count = itemm.DonationAmount + count;
+        }
+
+    }*@
+    <div>
+        <!-- Features Start -->
+        <div class="container-fluid" style="background-color:coral">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 mt-5 py-5 pr-lg-5">
+                        <h6 class="text-danger font-weight-normal text-uppercase mb-3">Event is about</h6>
+                        <h1 class="mb-4 section-title"> @item.CampaignName</h1>
+                        <p class="mb-4">@item.Discription)</p>
+
+                        <a class="btn btn-danger mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs" asp-action="create" asp-route-id="@item.CamaignId">Donate</a>
+                         <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Edit" asp-route-id="@item.CamaignId">Edit</a> 
+                <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Details" asp-route-id="@item.CamaignId">Details</a> 
+                <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Delete" asp-route-id="@item.CamaignId">Delete</a>
+                @*<p>@count </p>*@
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="d-flex flex-column align-items-center justify-content-center h-100 overflow-hidden">
+                            <img class="h-100" src=" @item.ImageUrl" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Features End -->
+    </div>
+    <br />
+}
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -38,7 +82,7 @@
             </td>
             <td>
                @* @Html.DisplayFor(modelItem => item.ImageUrl)*@
-                    <img src="@item.ImageUrl">
+                    @*<img src="@item.ImageUrl">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CampaignCategory.CategoryName)
@@ -47,8 +91,9 @@
                 <a asp-action="Edit" asp-route-id="@item.CamaignId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CamaignId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CamaignId">Delete</a>
+                    <a asp-area="Events" asp-controller="DonationIs" asp-action="create" asp-route-id="@item.CamaignId">Donate</a>
             </td>
         </tr>
 }
     </tbody>
-</table>
+</table>*@

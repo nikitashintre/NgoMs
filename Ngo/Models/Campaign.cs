@@ -13,7 +13,7 @@ namespace Ngo.Models
         public int CamaignId { get; set; }
 
 
-        [Display(Name = "Event Name")]
+        [Display(Name = "Campaign Name")]
         [Required]
         [StringLength(100)]
         public string CampaignName { get; set; }
@@ -43,6 +43,12 @@ namespace Ngo.Models
         #region Navigation Properties to the Transaction Model - Donar
 
         public ICollection<DonationI> DonationIs { get; set; }
+
+        #endregion
+
+        #region Navigation Properties to the Transaction Model - Volunteer
+
+        public ICollection<Volunteer> Volunteers { get; set; }
 
         #endregion
     }

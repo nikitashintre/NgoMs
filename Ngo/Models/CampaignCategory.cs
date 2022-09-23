@@ -13,7 +13,7 @@ namespace Ngo.Models
         public int CategoryId { get; set; }
 
 
-        [Display(Name = "Event Name")]
+        [Display(Name = "Campaign Name")]
         [Required]
         [StringLength(100)]
         public string CategoryName { get; set; }

@@ -14,7 +14,7 @@ namespace Ngo.Models
 
 
         [Required(ErrorMessage = "Name is required")]
-        [Display(Name = "Donars Name")]
+        [Display(Name = "Donors Name")]
 
         [MaxLength(80, ErrorMessage = "{0} can contain a maxium of {1} characters.")]
         [MinLength(2, ErrorMessage = "{0} should contain a minimum of {1} characters.")]

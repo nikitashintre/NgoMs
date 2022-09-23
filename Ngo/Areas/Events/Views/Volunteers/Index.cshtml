@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Ngo.Models.Volunteer>
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> _userManager
+
+@{
+    ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
+}
+
+<h1></h1>
+@if (isAdmin)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VolunteerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Campaign)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolunteerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Campaign.CampaignName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VolunteerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VolunteerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VolunteerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+}
+else
+{
+    <h1 style="text-align:center">Thank You For Participating</h1>
+    <h2 style="text-align:center">We will late you know more details after some time on your personal mail</h2>
+}
