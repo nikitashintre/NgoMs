@@ -1,14 +1,27 @@
 ﻿@model IEnumerable<Ngo.Models.CampaignCategory>
 
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> _userManager
+
 @{
     ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
 
 <h1></h1>
+@if (isAdmin)
+{
 
-<p>
-    <a class="btn btn-sm btn-danger" asp-action="Create">Create New</a>
-</p>
+    <p>
+        <a class="btn btn-sm btn-danger" asp-action="Create">Create New</a>
+    </p>
+}
+else{
+    <p></p>
+}
 <table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
@@ -25,9 +38,17 @@
                 @Html.DisplayFor(modelItem => item.CategoryName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoryId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoryId">Delete</a>
+                    @if (isAdmin) {
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a>
+                    
+                    <a asp-action = "Delete" asp-route-id = "@item.CategoryId" > Delete </a >
+                    }
+                    else{
+                        <a></a>
+                    }
+                    <a asp-area="Events" asp-controller="Campaigns"
+                   asp-action="GetCampaignsOfCategory"
+                   asp-route-filterCategoryId="@item.CategoryId">Campaigns</a>
             </td>
         </tr>
 }

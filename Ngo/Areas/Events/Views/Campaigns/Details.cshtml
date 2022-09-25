@@ -1,9 +1,15 @@
 ﻿@model Ngo.Models.Campaign
 
-@{
-    ViewData["Title"] = "Details";
-}
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
 
+@inject UserManager<IdentityUser> _userManager
+
+@{
+    ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
+}
 <h1>Details</h1>
 
 @*<div>
@@ -36,7 +42,9 @@
         </dd>
     </dl>
 </div>*@
+
 <div>
+    
     <!-- Features Start -->
     <div class="container-fluid" style="background-color:darksalmon">
         <div class="container">
@@ -45,8 +53,7 @@
                     <h6 class="text-danger font-weight-normal text-uppercase mb-3">Event is about</h6>
                     <h1 class="mb-4 section-title"> @Html.DisplayFor(model => model.CampaignName)</h1>
                     <p class="mb-4">@Html.DisplayFor(model => model.Discription)</p>
-
-                    <a class="btn btn-primary mt-3 py-2 px-4" asp-area="Events" asp-controller="Donars" asp-action="Create" asp-route-id="@Model.CamaignId">Donate</a>
+                    
                 </div>
                 <div class="col-lg-5">
                     <div class="d-flex flex-column align-items-center justify-content-center h-100 overflow-hidden">
@@ -59,6 +66,9 @@
     <!-- Features End -->
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CamaignId">Edit</a> |
+    @if (isAdmin)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.CamaignId">Edit</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

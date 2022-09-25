@@ -16,7 +16,7 @@ namespace Ngo.Areas.Events.Controllers
     public class CampaignsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        int total = 0;
         public CampaignsController(ApplicationDbContext context)
         {
             _context = context;
@@ -25,9 +25,21 @@ namespace Ngo.Areas.Events.Controllers
         // GET: Events/Campaigns
         public async Task<IActionResult> Index()
         {
+              
             var applicationDbContext = _context.Campaigns.Include(c => c.CampaignCategory);
             return View(await applicationDbContext.ToListAsync());
         }
+        // GET: LibMgmt/GetBooksOfCategory?filterCategoryId=5
+        public async Task<IActionResult> GetCampaignsOfCategory(int filterCategoryId)
+        {
+            var viewmodel = await _context.Campaigns
+                .Where(b => b.CategoryId == filterCategoryId)
+                                          .Include(b => b.CampaignCategory)
+                                          .ToListAsync();
+
+            return View(viewName: "Index", model: viewmodel);
+        }
+       
 
         // GET: Events/Campaigns/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -36,6 +48,17 @@ namespace Ngo.Areas.Events.Controllers
             {
                 return NotFound();
             }
+            //DonationI donationI = new DonationI();
+
+            ////total = 0;
+            //for (int i = 1; i <= _context.DonationIs.Count(); i++)
+            //{
+            //    if (donationI.CampaignId == id)
+            //    {
+            //        total = donationI.DonationAmount + total;
+            //    }
+            //}
+            //ViewBag.Total = total;
 
             var campaign = await _context.Campaigns
                 .Include(c => c.CampaignCategory)

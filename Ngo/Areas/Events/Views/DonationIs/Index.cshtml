@@ -1,9 +1,18 @@
 ﻿@model IEnumerable<Ngo.Models.DonationI>
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> _userManager
 
 @{
     ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
 
+<h1></h1>
+@if (isAdmin)
+{
 <h1></h1>
 
 <p>
@@ -32,6 +41,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+
         <tr class="table-danger">
             <td>
                 @Html.DisplayFor(modelItem => item.DonarName)
@@ -57,3 +67,8 @@
 }
     </tbody>
 </table>
+}
+else{
+    <h1 style="text-align:center">Thank You For Donating</h1>
+    <h2 style="text-align:center">We will late you know more details after some time on your personal mail</h2>
+}

@@ -5,7 +5,7 @@
 @inject SignInManager<IdentityUser> _signInManager
 
 @*----- gets the user object to see properties, roles *@
-@inject UserManager<IdentityUser> _userManager                  
+@inject UserManager<IdentityUser> _userManager
 
 @{
     bool isLoggedIn = _signInManager.IsSignedIn(this.User);
@@ -51,6 +51,12 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
     </script>
+    @*<style>
+        body {
+            background-image: url('img/bg3.jpg');
+            margin: 0;
+        }
+    </style>*@
 </head>
 
 <body style="background-color:gold">
@@ -69,21 +75,24 @@
                     <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                         <div class="navbar-nav ml-auto py-0">
                             <a class="nav-item nav-link active" asp-area="" asp-page="/Index">Home</a>
-                            @if(isLoggedIn) {
-    @if(isUserAdmin) {
-                            <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Index">Donation</a>
-    }
+                            @if (isLoggedIn)
+                            {
+                                @if (isUserAdmin)
+                                {
+                                    <a class="nav-item nav-link" asp-area="Events" asp-controller="Campaigns" asp-action="Index">Donation</a>
+                                }
                             }
-                            <a  asp-area="Events" asp-controller="Events" asp-action="Index" class="nav-item nav-link">Upcoming Events</a>
-                            <a href="project.html" class="nav-item nav-link">Project</a>
+                            <a asp-area="Events" asp-controller="Events" asp-action="Index" class="nav-item nav-link">Upcoming Events</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Campaigns</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a class="dropdown-item"
                                        asp-area="Events" asp-controller="CampaignCategories" asp-action="Index">Campaign Categories</a>
                                     <a class="dropdown-item"
                                        asp-area="Events" asp-controller="Campaigns" asp-action="Index">Campaigns</a>
-                                    <a href="single.html" class="dropdown-item">Blog Detail</a>
+                                       <a class="dropdown-item"
+                                       asp-area="Events" asp-controller="ShowCampaigns" asp-action="Index">SCampaigns</a>
+                                       
                                 </div>
                             </div>
                             @if (isLoggedIn)
@@ -101,7 +110,8 @@
                                         </div>
                                     </div>
                                 }
-                                else{
+                                else
+                                {
                                     <a></a>
                                 }
                             }
@@ -132,4 +142,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-

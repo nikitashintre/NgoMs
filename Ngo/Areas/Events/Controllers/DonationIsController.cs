@@ -62,6 +62,7 @@ namespace Ngo.Areas.Events.Controllers
                 var Camp = _context.Campaigns.SingleOrDefault(c => c.CamaignId == id);
                 ViewBag.CampaignId = Camp.CamaignId;
                 ViewBag.CampaignName = Camp.CampaignName;
+
                 //ViewData["CampaignId"] = new SelectList(Camp, "CampaignId", "CampaignName");
             //ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
             return View();
@@ -74,6 +75,7 @@ namespace Ngo.Areas.Events.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DonationId,DonarName,Email,Mobile,DonationAmount,CampaignId")] DonationI donationI)
         {
+
             if (ModelState.IsValid)
             {
                 _context.Add(donationI);

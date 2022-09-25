@@ -1,23 +1,38 @@
 ﻿@model IEnumerable<Ngo.Models.Campaign>
 
 
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> _userManager
+
 @{
     ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
-
 <h1>Campaigns</h1>
 
-<p>
-    <a class="button btn-sm btn-danger" asp-action="Create">Create New</a>
-</p>
+@if (isAdmin)
+{
+    <p>
+        <a class="button btn-sm btn-danger" asp-action="Create">Create New</a>
+    </p>
+}
+else{
+    <p></p>
+}
 @*@{
     var i=1;
-    var donation = Ngo.Models.DonationI;
+    //var donation = Ngo.Models.DonationI;
+    
 
 }*@
 @foreach(var item in Model){
+
     @*int count;
-    @foreach (var itemm in donation)
+   
+    @foreach (var itemm in )
     {
         @if (itemm.CamaignId == i)
         {
@@ -26,6 +41,7 @@
 
     }*@
     <div>
+        
         <!-- Features Start -->
         <div class="container-fluid" style="background-color:coral">
             <div class="container">
@@ -34,12 +50,16 @@
                         <h6 class="text-danger font-weight-normal text-uppercase mb-3">Event is about</h6>
                         <h1 class="mb-4 section-title"> @item.CampaignName</h1>
                         <p class="mb-4">@item.Discription)</p>
-
                         <a class="btn btn-danger mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs" asp-action="create" asp-route-id="@item.CamaignId">Donate</a>
+                        @if(isAdmin){
                          <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Edit" asp-route-id="@item.CamaignId">Edit</a> 
-                <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Details" asp-route-id="@item.CamaignId">Details</a> 
                 <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Delete" asp-route-id="@item.CamaignId">Delete</a>
-                @*<p>@count </p>*@
+                        }
+                        else{
+                            <a></a>
+                        }
+                        <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Details" asp-route-id="@item.CamaignId">Details</a>
+                        @*<p>@count </p>*@
                     </div>
                     <div class="col-lg-5">
                         <div class="d-flex flex-column align-items-center justify-content-center h-100 overflow-hidden">

@@ -24,6 +24,8 @@ namespace Ngo.Models
         [StringLength(1000)]
         public string Discription { get; set; }
 
+      
+
         public string ImageUrl { get; set; }
         #region Navigation Properties to the Master Model - CampaignCategory
 
