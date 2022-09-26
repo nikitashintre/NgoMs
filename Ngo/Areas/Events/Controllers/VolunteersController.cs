@@ -15,6 +15,8 @@ using Ngo.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 
 
+
+
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
@@ -57,7 +59,7 @@ namespace Ngo.Areas.Events.Controllers
         }
 
         // GET: Events/Volunteers/Create
-        [Authorize(Roles = "NgoMember")]
+        //[Authorize(Roles = "NgoMember")]
         public IActionResult Create()
         {
             ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
@@ -69,18 +71,18 @@ namespace Ngo.Areas.Events.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "NgoMember")]
+        //[Authorize(Roles = "NgoMember")]
         public async Task<IActionResult> Create([Bind("VolunteerId,VolunteerName,Email,Mobile,City,CampaignId")] Volunteer volunteer)
         {
             // Sanitize the data
             volunteer.Email = volunteer.Email.Trim();
 
             // Validation Checks - Server-side validation
-            
+           
             bool duplicateExists = _context.Volunteers.Any(v => v.Email == volunteer.Email);
             if (duplicateExists)
             {
-                ModelState.AddModelError("Email", "You Have already joined us as Volunteer!");
+                ModelState.AddModelError("Email", "You Have already joined us as Volunteer! To Change the Campaign volunteering ask Admin");
             }
 
             if (ModelState.IsValid)

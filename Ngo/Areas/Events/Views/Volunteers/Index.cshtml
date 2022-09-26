@@ -14,12 +14,12 @@
 @if (isAdmin)
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a class="button btn-sm btn-danger" asp-action="Create">New Volunteer</a>
     </p>
 
 
-    <table class="table">
-        <thead>
+    <table class="table table-bordere table-striped ">
+        <thead class="thead-dark">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.VolunteerName)
@@ -42,7 +42,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="table-info text-dark">
                     <td>
                         @Html.DisplayFor(modelItem => item.VolunteerName)
                     </td>
@@ -59,9 +59,9 @@
                         @Html.DisplayFor(modelItem => item.Campaign.CampaignName)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.VolunteerId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.VolunteerId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.VolunteerId">Delete</a>
+                        <a class="button btn-sm btn-danger" asp-action="Edit" asp-route-id="@item.VolunteerId">Edit</a> 
+                        <a class="button btn-sm btn-danger" asp-action="Details" asp-route-id="@item.VolunteerId">Details</a> 
+                        <a class="button btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.VolunteerId">Delete</a>
                     </td>
                 </tr>
             }

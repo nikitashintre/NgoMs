@@ -9,7 +9,6 @@
     var user = await _userManager.GetUserAsync(this.User);
     var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
-
 <h1></h1>
 @if (isAdmin)
 {
@@ -18,7 +17,7 @@
 <p>
     <a asp-action="Create">New Donar</a>
 </p>
-<table class="table table-bordered">
+<table class="table table-bordered border-success">
     <thead class="thead-dark">
         <tr>
             <th>
@@ -42,7 +41,7 @@
     <tbody>
 @foreach (var item in Model) {
 
-        <tr class="table-danger">
+                <tr class="table-danger  text-dark">
             <td>
                 @Html.DisplayFor(modelItem => item.DonarName)
             </td>
@@ -59,9 +58,9 @@
                 @Html.DisplayFor(modelItem => item.Campaign.CampaignName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.DonationId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DonationId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DonationId">Delete</a>
+               <a class="button btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.DonationId">Edit</a>
+                        <a class="button btn-sm btn-info" asp-action="Details" asp-route-id="@item.DonationId">Details</a>
+                        <a class="button btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.DonationId">Delete</a>
             </td>
         </tr>
 }

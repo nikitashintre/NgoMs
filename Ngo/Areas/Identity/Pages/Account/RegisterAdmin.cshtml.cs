@@ -17,15 +17,15 @@ using Ngo.Models.Enums;
 
 namespace Ngo.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
-    public class RegisterModel : PageModel
+    [Authorize(Roles = "NgoAdmin")]
+    public class RegisterAdminModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public RegisterAdminModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
@@ -79,9 +79,8 @@ namespace Ngo.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    // Add the User to the Default Role for the user
-                    await _userManager.AddToRoleAsync(user, MyIdentityRoleNames.NgoMember.ToString());
+                    _logger.LogInformation("User with Admin Priviliges created a new account with password.");
+                    await _userManager.AddToRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Ngo.Models.NgoEvent>
+
+@using Ngo.Models.Enums
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<IdentityUser> _userManager
+
+@{
+    ViewData["Title"] = "Index";
+    var user = await _userManager.GetUserAsync(this.User);
+    var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
+}
+<h1>Upcoming Events</h1>
+
+@if (isAdmin)
+{
+    <p>
+        <a class="button btn-sm btn-warning" asp-action="Create">Create New</a>
+    </p>
+}else{
+    <a></a>
+}
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr class="table-dark">
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+                @if (isAdmin)
+                {
+
+            <td>
+                   
+
+                <a class="button btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.EventId">Edit</a> 
+                <br>
+               @* <a class="button btn-sm btn-warning" asp-action="Details" asp-route-id="@item.EventId">Details</a> *@
+                <br>
+                <a class="button btn-sm btn-warning" asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                    
+            </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>

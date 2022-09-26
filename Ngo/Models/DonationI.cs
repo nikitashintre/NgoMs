@@ -15,6 +15,7 @@ namespace Ngo.Models
 
         [Required(ErrorMessage = "Name is required")]
         [Display(Name = "Donors Name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Only character is allowded")]
 
         [MaxLength(80, ErrorMessage = "{0} can contain a maxium of {1} characters.")]
         [MinLength(2, ErrorMessage = "{0} should contain a minimum of {1} characters.")]

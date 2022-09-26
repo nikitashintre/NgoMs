@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Ngo.Areas.Events.ViewModels;
 using Ngo.Data;
 using Ngo.Models;
 
@@ -49,12 +50,25 @@ namespace Ngo.Areas.Events.Controllers
         }
 
         // GET: Events/DonationIs/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
-        //    return View();
-        //}
+        public IActionResult Create1()
+        {
+            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create1([Bind("DonationId,DonarName,Email,Mobile,DonationAmount,CampaignId")] DonationI donationI)
+        {
 
+            if (ModelState.IsValid)
+            {
+                _context.Add(donationI);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName", donationI.CampaignId);
+            return View(donationI);
+        }
         public IActionResult Create(int id)
         {
             //DonationI donation = new DonationI();
@@ -79,6 +93,14 @@ namespace Ngo.Areas.Events.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(donationI);
+                //ShowCampaignsViewModel showCampaignsViewModel = new ShowCampaignsViewModel();
+                //for (int i = 0; i < _context.Campaigns.Count(); i++)
+                //{
+                //    if (donationI.CampaignId == i)
+                //    {
+                //        showCampaignsViewModel.Total = donationI.DonationAmount + showCampaignsViewModel.Total;
+                //    }
+                //}
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

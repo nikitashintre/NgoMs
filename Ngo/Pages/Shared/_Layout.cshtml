@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+          rel='stylesheet'>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
@@ -62,13 +64,20 @@
 <body style="background-color:gold">
 
     <header>
-        <!-- Navbar Start -->
+        <div class="container-fluid bg-dark py-3">
+            <div class="container">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 display-5 text-white"><span class="text-primary">Smile</span>Foundation</h1>
+                </a>
+        </div>
+        </div>
+            <!-- Navbar Start -->
         <div class="container-fluid position-relative nav-bar p-0">
             <div class="container position-relative" style="z-index: 9;">
                 <nav class="navbar navbar-expand-lg bg-danger navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                    <a href="" class="navbar-brand">
+                   @* <a href="" class="navbar-brand">
                         <h1 class="m-0 display-5 text-white"><span class="text-primary">Smile</span>Foundation</h1>
-                    </a>
+                    </a>*@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -79,10 +88,13 @@
                             {
                                 @if (isUserAdmin)
                                 {
-                                    <a class="nav-item nav-link" asp-area="Events" asp-controller="Campaigns" asp-action="Index">Donation</a>
+                                   <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Index">Donor List</a>
+                                    <a class="nav-item nav-link" asp-area="Events" asp-controller="Volunteers" asp-action="Index">Volunteers List</a>
+
                                 }
                             }
-                            <a asp-area="Events" asp-controller="Events" asp-action="Index" class="nav-item nav-link">Upcoming Events</a>
+                            <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Create1">Donation</a>
+                            <a asp-area="Events" asp-controller="NgoEvents" asp-action="Index" class="nav-item nav-link">Upcoming Events</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Campaigns</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -90,8 +102,8 @@
                                        asp-area="Events" asp-controller="CampaignCategories" asp-action="Index">Campaign Categories</a>
                                     <a class="dropdown-item"
                                        asp-area="Events" asp-controller="Campaigns" asp-action="Index">Campaigns</a>
-                                       <a class="dropdown-item"
-                                       asp-area="Events" asp-controller="ShowCampaigns" asp-action="Index">SCampaigns</a>
+                                      @* <a class="dropdown-item"
+                                       asp-area="Events" asp-controller="ShowCampaigns" asp-action="Index">SCampaigns</a>*@
                                        
                                 </div>
                             </div>

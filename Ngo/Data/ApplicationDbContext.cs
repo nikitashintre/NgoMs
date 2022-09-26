@@ -19,6 +19,7 @@ namespace Ngo.Data
         public DbSet<DonationI> DonationIs { get; set; }
 
         public DbSet<Volunteer> Volunteers { get; set; }    
+        public DbSet<NgoEvent> NgoEvents { get; set; }
        
         
     }
