@@ -24,7 +24,7 @@ namespace Ngo.Models
         [StringLength(1000)]
         public string Discription { get; set; }
 
-        [Display(Name ="Enter Start Date")]
+        [Display(Name ="Start Date")]
         [Required]
         public DateTime StartDate { get; set; }
 
