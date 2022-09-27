@@ -10,44 +10,43 @@ using System.Linq;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
-    public class ShowCampaignsController : Controller
+    public class ShowVolunteersController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly ILogger<ShowCampaignsController> _logger;
+        private readonly ILogger<ShowVolunteersController> _logger;
 
-        public ShowCampaignsController(
+        public ShowVolunteersController(
             ApplicationDbContext dbContext,
-            ILogger<ShowCampaignsController> logger)
+            ILogger<ShowVolunteersController> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
         public IActionResult Index()
         {
-            PopulateDropDownListToSelectCategory();
+         
+        PopulateDropDownListToSelectCategory();
 
-            _logger.LogInformation("--- extracted Categories");
-            
-
+        _logger.LogInformation("--- extracted Categories");
             return View();
         }
         private void PopulateDropDownListToSelectCategory()
         {
-            List<SelectListItem> categories = new List<SelectListItem>();
-            categories.Add(new SelectListItem
+            List<SelectListItem> volunteers = new List<SelectListItem>();
+            volunteers.Add(new SelectListItem
             {
-                Text = "----- select a category -----",
+                Text = "----- select a campaign -----",
                 Value = "",
                 Selected = true
             });
-            categories.AddRange(new SelectList(_dbContext.CampaignCategories, "CategoryId", "CategoryName"));
-            
+            volunteers.AddRange(new SelectList(_dbContext.Campaigns, "CampaignId", "CampaignName"));
 
-            ViewData["CategoriesCollection"] = categories;
+
+            ViewData["CategoriesCollection"] = volunteers;
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index([Bind("CategoryId")] ShowCampaignsViewModel viewmodel)
+        public IActionResult Index([Bind("CampignId")] ShowVolunteersViewModel viewmodel)
         {
             if (!ModelState.IsValid)
             {
@@ -58,11 +57,11 @@ namespace Ngo.Areas.Events.Controllers
             }
 
             // Now performing server-side validation - checking if any books exist for the selected category
-            bool CampaignsExist = _dbContext.Campaigns.Any(b => b.CategoryId == viewmodel.CategoryId);
-            if (!CampaignsExist)
+            bool VolunteersExist = _dbContext.Volunteers.Any(b => b.CampaignId == viewmodel.CampaignId);
+            if (!VolunteersExist)
             {
                 //--- Error will be shown as part of the Validation Summary
-                ModelState.AddModelError("", "No campaigns were found for the selected category!");
+                ModelState.AddModelError("", "No Volunteers were found for the selected campaign!");
 
                 //--- Error will be attached to the UI Control mapped by the asp-for attribute.
                 // ModelState.AddModelError("CategoryId", "No books were found for this category");
@@ -70,21 +69,11 @@ namespace Ngo.Areas.Events.Controllers
                 PopulateDropDownListToSelectCategory();
                 return View(viewmodel);         // return the viewmodel with the ModelState errors!
             }
-            DonationI donationI = new DonationI();
-
-            int total = 0;
-            for (int i = 1; i <= _dbContext.DonationIs.Count(); i++)
-            {
-                if (donationI.CampaignId == viewmodel.CategoryId)
-                {
-                    total = donationI.DonationAmount + total;
-                }
-            }
-            ViewBag.Total = total;
+           
             return RedirectToAction(
-                actionName: "GetCampaignsOfCategory",
-                controllerName: "Campaigns",
-                routeValues: new { area = "Events", filterCategoryId = viewmodel.CategoryId });
+                actionName: "GetVolunteersOfCategory",
+                controllerName: "Volunteers",
+                routeValues: new { area = "Events", filterCategoryId = viewmodel.CampaignId });
         }
     }
 }

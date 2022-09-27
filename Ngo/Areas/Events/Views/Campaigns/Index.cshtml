@@ -50,10 +50,17 @@ else{
                         <h6 class="text-danger font-weight-normal text-uppercase mb-3">Event is about</h6>
                         <h1 class="mb-4 section-title"> @item.CampaignName</h1>
                         <p class="mb-4">@item.Discription)</p>
-                        <a class="btn btn-danger mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs" asp-action="create" asp-route-id="@item.CamaignId">Donate</a>
+                        @if(!isAdmin){
+                        <a class="btn btn-success mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs" asp-action="create" asp-route-id="@item.CamaignId">Donate</a>
+                        }else{
+                            <a></a>
+                        }
                         @if(isAdmin){
-                         <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Edit" asp-route-id="@item.CamaignId">Edit</a> 
+                         <a class="btn btn-warning mt-3 py-2 px-4" asp-action="Edit" asp-route-id="@item.CamaignId">Edit</a> 
                 <a class="btn btn-danger mt-3 py-2 px-4" asp-action="Delete" asp-route-id="@item.CamaignId">Delete</a>
+                            <a class="btn btn-info mt-3 py-2 px-4" asp-area="Events" asp-controller="Volunteers"
+                       asp-action="GetVolunteersOfCategory"
+                       asp-route-filterCategoryId="@item.CamaignId">Volunteers</a>
                         }
                         else{
                             <a></a>

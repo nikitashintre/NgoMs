@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Ngo.Models.DonationI>
 @using Ngo.Models.Enums
 @using Microsoft.AspNetCore.Identity
+@using Ngo.Data
+@using Ngo.Models
 
 @inject UserManager<IdentityUser> _userManager
 
@@ -10,12 +12,13 @@
     var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
 <h1></h1>
+
 @if (isAdmin)
 {
 <h1></h1>
 
 <p>
-    <a asp-action="Create">New Donar</a>
+    <a class="button btn-sm btn-danger" asp-action="Create1">New Donar</a>
 </p>
 <table class="table table-bordered border-success">
     <thead class="thead-dark">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,10 +13,11 @@ using Ngo.Models;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
+    [Authorize]
     public class CampaignCategoriesController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly ILogger<CampaignCategory> _logger;
+        private readonly ApplicationDbContext _context;    //Added context to database
+        private readonly ILogger<CampaignCategory> _logger;   //_logger entry
 
         public CampaignCategoriesController(ApplicationDbContext context, ILogger<CampaignCategory> logger)
         {
@@ -65,7 +67,7 @@ namespace Ngo.Areas.Events.Controllers
 
             // Validation Checks - Server-side validation
             bool duplicateExists = _context.CampaignCategories.Any(c => c.CategoryName ==campaignCategory.CategoryName);
-            if (duplicateExists)
+            if (duplicateExists)            //Check for duplicity
             {
                 ModelState.AddModelError("CategoryName", "Duplicate Category Found!");
             }
@@ -106,6 +108,17 @@ namespace Ngo.Areas.Events.Controllers
             if (id != campaignCategory.CategoryId)
             {
                 return NotFound();
+            }
+
+            // Sanitize the data
+            campaignCategory.CategoryName = campaignCategory.CategoryName.Trim();
+
+            // Validation Checks - Server-side validation
+            bool duplicateExists = _context.CampaignCategories
+                .Any(c => c.CategoryName == campaignCategory.CategoryName && c.CategoryId != campaignCategory.CategoryId);
+            if (duplicateExists)
+            {
+                ModelState.AddModelError("CategoryName", "Duplicate Category Found!");
             }
 
             if (ModelState.IsValid)

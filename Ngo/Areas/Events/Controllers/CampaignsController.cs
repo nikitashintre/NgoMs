@@ -18,8 +18,8 @@ namespace Ngo.Areas.Events.Controllers
     [Authorize]
     public class CampaignsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        int total = 0;
+        private readonly ApplicationDbContext _context;                 //context to database
+        
         public CampaignsController(ApplicationDbContext context)
         {
             _context = context;
@@ -129,6 +129,17 @@ namespace Ngo.Areas.Events.Controllers
             if (id != campaign.CamaignId)
             {
                 return NotFound();
+            }
+            // Sanitize the data
+            campaign.CampaignName = campaign.CampaignName.Trim();
+
+            // Validation Checks - Server-side validation
+            bool duplicateExists = _context.Campaigns
+                .Any(c => c.CampaignName == campaign.CampaignName && c.CamaignId != campaign.CamaignId);
+            
+            if (duplicateExists)
+            {
+                ModelState.AddModelError("CampaignName", "Duplicate Campaign Found!");
             }
 
             if (ModelState.IsValid)

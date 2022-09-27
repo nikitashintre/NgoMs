@@ -8,8 +8,8 @@ namespace Ngo.Models
 {
     public class Volunteer
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]                                                       //Primary Key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]       //Identity Auto generated
         public int VolunteerId { get; set; }
 
 
@@ -19,11 +19,11 @@ namespace Ngo.Models
         [MaxLength(80, ErrorMessage = "{0} can contain a maxium of {1} characters.")]
         [MinLength(2, ErrorMessage = "{0} should contain a minimum of {1} characters.")]
         [RegularExpression( @"^[a-zA-Z]+$",ErrorMessage="Only character is allowded")]
-        public string VolunteerName { get; set; }
+        public string VolunteerName { get; set; }   
 
         [Required(ErrorMessage = "email is required")]
         [Display(Name = "Email")]
-        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]
+        [RegularExpression("^[a-z0-9_\\+-]+(\\.[a-z0-9_\\+-]+)*@[a-z0-9-]+(\\.[a-z0-9]+)*\\.([a-z]{2,4})$", ErrorMessage = "Invalid email format.")]  //Email Validation
         public string Email { get; set; } = "";
 
         [Required(ErrorMessage = "Mobile is required")]
@@ -46,7 +46,7 @@ namespace Ngo.Models
         public int CampaignId { get; set; }
 
 
-        [ForeignKey(nameof(Volunteer.CampaignId))]
+        [ForeignKey(nameof(Volunteer.CampaignId))]          //Foraign Key
         public Campaign Campaign { get; set; }
 
 

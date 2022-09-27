@@ -8,8 +8,8 @@ namespace Ngo.Models
     [Table("CampaignCategory")]
     public class CampaignCategory
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]                                                               //Primary Key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]               //Identity key
         public int CategoryId { get; set; }
 
 
@@ -20,7 +20,7 @@ namespace Ngo.Models
 
         #region Navigation Properties to the Transaction Model - Campaign
 
-        public ICollection<Campaign> Campaigns { get; set; }
+        public ICollection<Campaign> Campaigns { get; set; }                //ICollection of Campaign
 
         #endregion
 

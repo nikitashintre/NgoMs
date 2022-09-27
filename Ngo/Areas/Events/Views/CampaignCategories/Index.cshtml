@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Ngo.Models.CampaignCategory>
-
+@*Add Identity User*@
 @using Ngo.Models.Enums
 @using Microsoft.AspNetCore.Identity
 
@@ -12,7 +12,7 @@
 }
 
 <h1></h1>
-@if (isAdmin)
+@if (isAdmin) //Check if user is Admin
 {
 
     <p>
@@ -46,7 +46,7 @@ else{
                     else{
                         <a></a>
                     }
-                    <a class="btn-secondary" asp-area="Events" asp-controller="Campaigns"
+                    <a class="button btn-sm btn-danger" asp-area="Events" asp-controller="Campaigns"
                    asp-action="GetCampaignsOfCategory"
                    asp-route-filterCategoryId="@item.CategoryId">Campaigns</a>
             </td>

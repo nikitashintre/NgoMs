@@ -38,7 +38,16 @@ namespace Ngo.Areas.Events.Controllers
             var applicationDbContext = _context.Volunteers.Include(v => v.Campaign);
             return View(await applicationDbContext.ToListAsync());
         }
+        // GET: LibMgmt/GetVolunteersOfCategory?filterCategoryId=5
+        public async Task<IActionResult> GetVolunteersOfCategory(int filterCategoryId)
+        {
+            var viewmodel = await _context.Volunteers
+                                          .Where(b => b.CampaignId == filterCategoryId)
+                                          .Include(b => b.Campaign)
+                                          .ToListAsync();
 
+            return View(viewName: "Index", model: viewmodel);
+        }
         // GET: Events/Volunteers/Details/5
         public async Task<IActionResult> Details(int? id)
         {

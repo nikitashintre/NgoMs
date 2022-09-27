@@ -26,6 +26,7 @@ namespace Ngo.Areas.Events.Controllers
         // GET: Events/DonationIs
         public async Task<IActionResult> Index()
         {
+            
             var applicationDbContext = _context.DonationIs.Include(d => d.Campaign);
             return View(await applicationDbContext.ToListAsync());
         }

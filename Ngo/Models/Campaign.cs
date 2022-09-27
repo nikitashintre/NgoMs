@@ -8,8 +8,8 @@ namespace Ngo.Models
     [Table("Campaigns")]
     public class Campaign
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]                                                                       //Primary Key
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]                       //Identity Auto generated 
         public int CamaignId { get; set; }
 
 
@@ -35,8 +35,8 @@ namespace Ngo.Models
         [Display(Name = "Select The Campaign Category")]
         public int CategoryId { get; set; }
 
-
-        [ForeignKey(nameof(Campaign.CategoryId))]
+        [System.Text.Json.Serialization.JsonIgnore]
+        [ForeignKey(nameof(Campaign.CategoryId))]           //Foraign Key
         public CampaignCategory CampaignCategory { get; set; }
 
 
