@@ -11,7 +11,7 @@
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active carousel-fluid">
-                    <img class="w-200" src="~/img//ngo3.jpg" alt="Image">
+                    <img class="w-200" height:"100"; src="~/img//ngo3.jpg" alt="Image">
                     
                 </div>
                 <div class="carousel-item">
@@ -111,57 +111,8 @@
 <div>
 
 </div>
-   @* <!-- Team Start -->
-    <div class="container-fluid bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6">
-                    <div class="py-5 px-4 h-100 bg-primary d-flex flex-column align-items-center justify-content-center">
-                        <h6 class="text-white font-weight-normal text-uppercase mb-3">Our Team</h6>
-                        <h1 class="mb-0 text-center">Meet Our Team Members</h1>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-6 p-0 py-sm-5">
-                    <div class="owl-carousel team-carousel position-relative p-0 py-sm-5">
-                        <div class="team d-flex flex-column text-center mx-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100" src="img/mentor1.jpg" alt="">
-                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-primary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-primary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-primary text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column bg-secondary text-center py-3">
-                                <h5 class="text-white">Shailesh Dhuri</h5>
-                                <p class="m-0">Shailesh is an accomplished, versatile, technology-savvy, and result-driven professional with more than 25 years of experience in Entrepreneurship and Fund Management.</p>
-                            </div>
-                        </div>
-                        <div class="team d-flex flex-column text-center mx-3">
-                            <div class="position-relative">
-                                <img class="img-fluid w-100" src="img/mentor2.jpg" alt="">
-                                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                                    <a class="btn btn-outline-primary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-outline-primary text-center mr-2 px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-outline-primary text-center px-0" style="width: 38px; height: 38px;" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column bg-secondary text-center py-3">
-                                <h5 class="text-white">Shubhra Mehrotra</h5>
-                                <p class="m-0">
-                                    Shubhra is a senior Pharmaceutical executive with over 23 years of experience in Business Development, Licensing, Strategic Planning, Portfolio Acquisition & divestments and Alliance Management
-
-                                </p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-          </div>
-     </div>
-</div>
-    
-    <!-- Team End -->*@
+ 
+    <!-- Team End -->
     <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-md-5">
         <div class="row pt-5">
             <div class="col-lg-3 col-md-6 mb-5">
@@ -179,20 +130,22 @@
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Quick Links</h4>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" asp-area="" asp-page="/Index"><i class="fa fa-angle-right mr-2"></i>Home</a>
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
+                    <a class="text-white mb-2" asp-area="Events" asp-controller="DonationIs" asp-action="Create1"><i class="fa fa-angle-right mr-2"></i>Donate</a>
+                    <a class="text-white mb-2" asp-area="Events" asp-controller="CampaignCategories" asp-action="Index">
+                        <i class="fa fa-angle-right mr-2"></i> Campaigns
+                    </a>
                     <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-primary mb-4">Popular Links</h4>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" asp-area="" asp-page="/Index"><i class="fa fa-angle-right mr-2"></i>Home</a>
                     <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
+                    <a class="text-white mb-2" asp-area="Events" asp-controller="CampaignCategories" asp-action="Index"><i class="fa fa-angle-right mr-2"></i>Upcoming Events</a>
+                    <a class="text-white mb-2" asp-area="Events" asp-controller="CampaignCategories" asp-action="Index"><i class="fa fa-angle-right mr-2"></i>Campaigns</a>
                     <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                 </div>
             </div>
@@ -220,7 +173,7 @@
     </div>
     <!-- Footer End -->
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+   @* <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>*@
 
 
     <!-- JavaScript Libraries -->

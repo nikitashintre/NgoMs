@@ -40,7 +40,9 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr class="table-dark">
+            var dateValue1 = item.StartDate.ToString("MM/dd/yyyy");
+            var dateValue2 = item.EndDate.ToString("MM/dd/yyyy");
+        <tr class="table-success">
             <td>
                 @Html.DisplayFor(modelItem => item.EventName)
             </td>
@@ -48,10 +50,12 @@
                 @Html.DisplayFor(modelItem => item.Discription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate.Date)
+                @*@Html.DisplayFor(modelItem => item.StartDate.Date)*@
+                <a>@dateValue1</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
+               @* @Html.DisplayFor(modelItem => item.EndDate)*@
+               <a>@dateValue2</a>
             </td>
                 @if (isAdmin)
                 {

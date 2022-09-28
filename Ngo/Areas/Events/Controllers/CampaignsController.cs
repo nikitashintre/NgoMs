@@ -32,7 +32,7 @@ namespace Ngo.Areas.Events.Controllers
             var applicationDbContext = _context.Campaigns.Include(c => c.CampaignCategory);
             return View(await applicationDbContext.ToListAsync());
         }
-        // GET: LibMgmt/GetBooksOfCategory?filterCategoryId=5
+        // GET: LibMgmt/GetCampaignsOfCategory?filterCategoryId=5
         public async Task<IActionResult> GetCampaignsOfCategory(int filterCategoryId)
         {
             var viewmodel = await _context.Campaigns
