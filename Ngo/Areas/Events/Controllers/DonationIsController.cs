@@ -28,6 +28,9 @@ namespace Ngo.Areas.Events.Controllers
         {
             
             var applicationDbContext = _context.DonationIs.Include(d => d.Campaign);
+            var total = 0;
+            total = await _context.DonationIs.SumAsync(d => d.DonationAmount);
+            ViewBag.DonationAmount = total;
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,11 +41,13 @@ namespace Ngo.Areas.Events.Controllers
                                           .Where(b => b.CampaignId == filterCategoryId)
                                           .Include(b => b.Campaign)
                                           .ToListAsync();
-            //var total = 0;
-            //total = await _context.DonationIs.Where(d => d.CampaignId == filterCategoryId).Include(b => b.Campaign).SumAsync(d => d.DonationAmount);
-            //ViewBag.DonationAmount = total;
+            var total = 0;
+            total = await _context.DonationIs.Where(d => d.CampaignId == filterCategoryId).Include(b => b.Campaign).SumAsync(d => d.DonationAmount);
+            ViewBag.DonationAmount = total;
             return View(viewName: "Index", model: viewmodel);
         }
+
+        
 
         // GET: Events/DonationIs/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -38,7 +38,7 @@ namespace Ngo.Areas.Events.Controllers
                 Value = "",
                 Selected = true
             });
-            donors.AddRange(new SelectList(_dbContext.Campaigns, "CampaignId", "CampaignName"));
+            donors.AddRange(new SelectList(_dbContext.Campaigns, "CampaignId", "CampaignName", ViewBag.DonationAmount));
 
 
             ViewData["CategoriesCollection"] = donors;

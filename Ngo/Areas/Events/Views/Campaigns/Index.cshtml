@@ -61,9 +61,10 @@ else{
                             <a class="btn btn-info mt-3 py-2 px-4" asp-area="Events" asp-controller="Volunteers"
                        asp-action="GetVolunteersOfCategory"
                        asp-route-filterCategoryId="@item.CamaignId">Volunteers</a>
-                            <a class="btn btn-info mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs"
+                            <a class="btn btn-warning mt-3 py-2 px-4" asp-area="Events" asp-controller="DonationIs"
                        asp-action="GetDonorsOfCategory"
-                       asp-route-filterCategoryId="@item.CamaignId">Donors</a>
+                       asp-route-filterCategoryId="@item.CamaignId">Recieved Donation</a>
+
                         }
                         else{
                             <a></a>
