@@ -27,11 +27,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
-
     <!-- JavaScript Bundle with Popper -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
     </script>
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
     </scrip>*@
 <head>
@@ -54,10 +52,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
     </script>
     @*<style>
-        body {
-            background-image: url('img/bg3.jpg');
-            margin: 0;
-        }
+    body {
+    background-image: url('img/bg3.jpg');
+    margin: 0;
+    }
     </style>*@
 </head>
 
@@ -69,14 +67,14 @@
                 <a href="" class="navbar-brand">
                     <h1 class="m-0 display-5 text-white"><span class="text-primary">Smile</span>Foundation</h1>
                 </a>
+            </div>
         </div>
-        </div>
-            <!-- Navbar Start -->
+        <!-- Navbar Start -->
         <div class="container-fluid position-relative nav-bar p-0">
             <div class="container position-relative" style="z-index: 9;">
                 <nav class="navbar navbar-expand-lg bg-danger navbar-dark py-3 py-lg-0 pl-3 pl-lg-5">
-                   @* <a href="" class="navbar-brand">
-                        <h1 class="m-0 display-5 text-white"><span class="text-primary">Smile</span>Foundation</h1>
+                    @* <a href="" class="navbar-brand">
+                    <h1 class="m-0 display-5 text-white"><span class="text-primary">Smile</span>Foundation</h1>
                     </a>*@
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
@@ -88,12 +86,33 @@
                             {
                                 @if (isUserAdmin)
                                 {
-                                   <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Index">Donor List</a>
+                                    <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Index">Donor List</a>
                                     <a class="nav-item nav-link" asp-area="Events" asp-controller="Volunteers" asp-action="Index">Volunteers List</a>
 
 
                                 }
                             }
+                            @if (isLoggedIn)
+                            {
+                                @if (!isUserAdmin)
+                                {
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Participate</a>
+                                        <div class="dropdown-menu rounded-0 m-0">
+                                            <a class="dropdown-item"
+                                       asp-area="Events" asp-controller="Volunteers" asp-action="Create">Volunteer</a>
+                                            <a class="dropdown-item"
+                                       asp-area="Events" asp-controller="Campaigns" asp-action="Index">Donate</a>
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <a></a>
+                                }
+                            }
+
                             <a class="nav-item nav-link" asp-area="Events" asp-controller="DonationIs" asp-action="Create1">Donate</a>
                             <a asp-area="Events" asp-controller="NgoEvents" asp-action="Index" class="nav-item nav-link">Upcoming Events</a>
                             <div class="nav-item dropdown">
@@ -108,38 +127,21 @@
                                         Categories API Demo
                                     </a>
                                 </div>
-                                      @* <a class="dropdown-item"
-                                       asp-area="Events" asp-controller="ShowCampaigns" asp-action="Index">SCampaigns</a>*@
-                                       
-                                </div>
+                                @* <a class="dropdown-item"
+                                asp-area="Events" asp-controller="ShowCampaigns" asp-action="Index">SCampaigns</a>*@
+
                             </div>
-                            @if (isLoggedIn)
-                            {
-                                @if (!isUserAdmin)
-                                {
-                                    <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Participate</a>
-                                        <div class="dropdown-menu rounded-0 m-0">
-                                            <a class="dropdown-item"
-                                       asp-area="Events" asp-controller="Volunteers" asp-action="Create">Volunteer</a>
-                                            <a class="dropdown-item"
-                                       asp-area="Events" asp-controller="Campaigns" asp-action="Index">Donate</a>
-                                            
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <a></a>
-                                }
-                            }
-                            
                         </div>
-                        <partial name="_LoginPartial" />
+                        
+
                     </div>
+                  
+                   <partial name="_LoginPartial" />
                 </nav>
             </div>
+           
         </div>
+       
         <!-- Navbar End -->
     </header>
     <div class="container">
