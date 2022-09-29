@@ -9,7 +9,7 @@ namespace Ngo.Models
     public class Campaign
     {
         /// <summary>
-        /// Primary key For Campaign
+        /// Primary key For Campaign 
         /// </summary>
         [Key]                                                                       //Primary Key
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]                       //Identity Auto generated 
