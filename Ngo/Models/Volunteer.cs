@@ -39,7 +39,9 @@ namespace Ngo.Models
 
         #region Navigation Properties to the Master Model - Campaign
 
-
+        /// <summary>
+        /// Foraign key relationship to Campaign Table
+        /// </summary>
         [Required]
 
         [Display(Name = "Select The Campaign Category")]

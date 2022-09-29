@@ -8,6 +8,9 @@ namespace Ngo.Models
     [Table("DonationInfos")]
     public class DonationI
     {
+        /// <summary>
+        /// Donores Primary Key
+        /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DonationId { get; set; }
@@ -29,14 +32,18 @@ namespace Ngo.Models
         [Required(ErrorMessage = "Mobile is required")]
         [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
         public string Mobile { get; set; }
-
+        /// <summary>
+        /// Donation amount must be greater than 500
+        /// </summary>
         [Required]
         [Range(500, int.MaxValue, ErrorMessage = "Please enter a amount grater than or equal to {1}")]
         public int DonationAmount { get; set; }
 
         #region Navigation Properties to the Master Model - Campaign
 
-
+        /// <summary>
+        /// Foraign key realtionship to Campaign Tabel
+        /// </summary>
         [Required]
 
         [Display(Name = "Select Campaign for which you want to donate")]
