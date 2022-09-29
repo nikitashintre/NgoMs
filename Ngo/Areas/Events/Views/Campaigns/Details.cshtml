@@ -11,38 +11,6 @@
     var isAdmin = await _userManager.IsInRoleAsync(user, MyIdentityRoleNames.NgoAdmin.ToString());
 }
 <h1>Details</h1>
-
-@*<div>
-    <h4>Campaign</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CampaignName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CampaignName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Discription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Discription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CampaignCategory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CampaignCategory.CategoryName)
-        </dd>
-    </dl>
-</div>*@
-
 <div>
     
     <!-- Features Start -->
@@ -70,5 +38,5 @@
     {
         <a asp-action="Edit" asp-route-id="@Model.CamaignId">Edit</a>
     }
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-warning" asp-action="Index">Back to List</a>
 </div>

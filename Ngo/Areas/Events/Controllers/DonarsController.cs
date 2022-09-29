@@ -14,7 +14,7 @@ namespace Ngo.Areas.Events.Controllers
     [Area("Events")]
     public class DonarsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;         //Context to database
 
         public DonarsController(ApplicationDbContext context)
         {

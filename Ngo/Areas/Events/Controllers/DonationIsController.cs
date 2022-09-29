@@ -13,10 +13,10 @@ using Ngo.Models;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
-    [Authorize]
+    [Authorize]                 //Check For LogIn
     public class DonationIsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;    //Context to Database
 
         public DonationIsController(ApplicationDbContext context)
         {

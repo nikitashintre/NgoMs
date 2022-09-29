@@ -8,7 +8,10 @@
 
 <h4></h4>
 <hr />
-<div class="row">
+<div style="background-image:url('https://cdn-fbged.nitrocdn.com/MfDhNPAJXJCJzhNpCzzAzqrKWruRMjdr/assets/static/optimized/wp-content/uploads/2022/04/1a2f97944827b88b66657ce94d756532.Magnarevo-Blog-ngo.jpg')">
+<div class="border container border-danger" style="padding:30px">
+
+<div class="row" >
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -32,12 +35,13 @@
                 <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+</div>
+</div>
 <div>
     <a class="button btn-sm btn-warning" asp-action="Index">Back to List</a>
 </div>

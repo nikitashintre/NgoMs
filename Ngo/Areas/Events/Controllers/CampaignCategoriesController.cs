@@ -13,7 +13,7 @@ using Ngo.Models;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
-    [Authorize]
+    [Authorize]         //Check if user has Logged in
     public class CampaignCategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;    //Added context to database

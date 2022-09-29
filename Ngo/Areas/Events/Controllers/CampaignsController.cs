@@ -15,7 +15,7 @@ using Ngo.Models;
 namespace Ngo.Areas.Events.Controllers
 {
     [Area("Events")]
-    [Authorize]
+    [Authorize]             //Check for LoginIn
     public class CampaignsController : Controller
     {
         private readonly ApplicationDbContext _context;                 //context to database

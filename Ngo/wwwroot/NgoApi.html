@@ -17,12 +17,12 @@
         <h1>List of Categories</h1>
 
         <table id="myTable" class="table table-striped table-bordered">
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th class="col-2">Category ID</th>
                     <th class="col-8">Category Name</th>
                     <th class="col-2 text-center">
-                        <button class="btn btn-sm btn-secondary" onclick="fAddNew()">Add new</button>
+                        <button class="btn btn-sm btn-success" onclick="fAddNew()">Add new</button>
                     </th>
                 </tr>
             </thead>
@@ -195,13 +195,13 @@
                 console.log(elem);               // for debugging
 
                 strHTML
-                    += '<tr>'
+                    += '<tr class="table-success">'
                     + '<td>' + elem.categoryId + '</td>'
                     + '<td>' + elem.categoryName + '</td>'
                     + '<td class="text-center">'
-                    + '<button type="button" class="btn btn-secondary btn-sm" onclick="fEdit(' + elem.categoryId + ')">Edit</button>'
+                    + '<button type="button" class="btn btn-success btn-sm" onclick="fEdit(' + elem.categoryId + ')">Edit</button>'
                     + '&nbsp;'
-                    + '<button type="button" class="btn btn-secondary btn-sm" onclick="fDelete('+ elem.categoryId +')">Delete</button>'
+                    + '<button type="button" class="btn btn-danger btn-sm" onclick="fDelete('+ elem.categoryId +')">Delete</button>'
                     + '</td>'
                     + '</tr>';
             });
