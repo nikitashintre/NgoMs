@@ -11,7 +11,7 @@ namespace Ngo.Areas.Events.ViewModels
         [Required(ErrorMessage = "Please select a category for displaying the books")]
         public int CategoryId { get; set; }
 
-        public int Total { get; set; }
+       // public int Total { get; set; }
 
         public ICollection<CampaignCategory> CampaignCategories { get; set; }
     }

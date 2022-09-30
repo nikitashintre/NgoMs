@@ -26,7 +26,7 @@ namespace Ngo.Areas.Events.Controllers
         // GET: Events/DonationIs
         public async Task<IActionResult> Index()
         {
-            
+
             var applicationDbContext = _context.DonationIs.Include(d => d.Campaign);
             var total = 0;
             total = await _context.DonationIs.SumAsync(d => d.DonationAmount);
@@ -50,7 +50,7 @@ namespace Ngo.Areas.Events.Controllers
             return View(viewName: "Index", model: viewmodel);
         }
 
-        
+
 
         // GET: Events/DonationIs/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -94,12 +94,12 @@ namespace Ngo.Areas.Events.Controllers
         public IActionResult Create(int id)
         {
             //DonationI donation = new DonationI();
-           
-                var Camp = _context.Campaigns.SingleOrDefault(c => c.CamaignId == id);
-                ViewBag.CampaignId = Camp.CamaignId;
-                ViewBag.CampaignName = Camp.CampaignName;
 
-                //ViewData["CampaignId"] = new SelectList(Camp, "CampaignId", "CampaignName");
+            var Camp = _context.Campaigns.SingleOrDefault(c => c.CamaignId == id);
+            ViewBag.CampaignId = Camp.CamaignId;
+            ViewBag.CampaignName = Camp.CampaignName;
+
+            //ViewData["CampaignId"] = new SelectList(Camp, "CampaignId", "CampaignName");
             //ViewData["CampaignId"] = new SelectList(_context.Campaigns, "CamaignId", "CampaignName");
             return View();
         }
@@ -115,14 +115,6 @@ namespace Ngo.Areas.Events.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(donationI);
-                //ShowCampaignsViewModel showCampaignsViewModel = new ShowCampaignsViewModel();
-                //for (int i = 0; i < _context.Campaigns.Count(); i++)
-                //{
-                //    if (donationI.CampaignId == i)
-                //    {
-                //        showCampaignsViewModel.Total = donationI.DonationAmount + showCampaignsViewModel.Total;
-                //    }
-                //}
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
