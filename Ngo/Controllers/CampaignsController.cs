@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Ngo.Data;
 using Ngo.Models;
 
@@ -15,31 +16,55 @@ namespace Ngo.Controllers
     public class CampaignsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-
-        public CampaignsController(ApplicationDbContext context)
+        private readonly ILogger<CampaignsController> _logger;
+        public CampaignsController(ApplicationDbContext context, ILogger<CampaignsController> logger)
         {
             _context = context;
+            _logger = logger;   
         }
 
         // GET: api/Campaigns
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Campaign>>> GetCampaigns()
         {
-            return await _context.Campaigns.ToListAsync();
+            //return await _context.Campaigns.ToListAsync();
+            try
+            {
+                var campaigns = await _context.Campaigns
+                                     .ToListAsync();
+
+                // Check if data exists in the Database
+                if (campaigns == null)
+                {
+                    return NotFound();          // RETURN: No data was found            HTTP 404
+                }
+                return Ok(campaigns);          // RETURN: OkObjectResult - good result HTTP 200
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(exp.Message); // RETURN: BadResult                    HTTP 400
+            }
         }
 
         // GET: api/Campaigns/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Campaign>> GetCampaign(int id)
         {
-            var campaign = await _context.Campaigns.FindAsync(id);
-
-            if (campaign == null)
+            try
             {
-                return NotFound();
-            }
+                var campaign = await _context.Campaigns.FindAsync(id);
 
-            return campaign;
+                if (campaign == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(campaign);
+            }
+            catch (Exception exp)
+            {
+                return BadRequest(exp.Message); // RETURN: BadResult                    HTTP 400
+            }
         }
 
         // PUT: api/Campaigns/5
@@ -88,9 +113,16 @@ namespace Ngo.Controllers
 
         // DELETE: api/Campaigns/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Campaign>> DeleteCampaign(int id)
+        public async Task<ActionResult<Campaign>> DeleteCampaign(int? id)
         {
-            var campaign = await _context.Campaigns.FindAsync(id);
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var campaign = await _context.Campaigns.FindAsync(id);
             if (campaign == null)
             {
                 return NotFound();
@@ -99,7 +131,13 @@ namespace Ngo.Controllers
             _context.Campaigns.Remove(campaign);
             await _context.SaveChangesAsync();
 
-            return campaign;
+            return Ok(campaign);
+            }
+            catch (System.Exception exp)
+            {
+                ModelState.AddModelError("DELETE", exp.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         private bool CampaignExists(int id)

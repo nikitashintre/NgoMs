@@ -8,6 +8,9 @@ namespace Ngo.Models
     [Table("NgoEvents")]
     public class NgoEvent
     {
+        /// <summary>
+        /// Primary key for NgoEvent
+        /// </summary>
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EventId { get; set; }

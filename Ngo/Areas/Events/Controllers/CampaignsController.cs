@@ -51,18 +51,7 @@ namespace Ngo.Areas.Events.Controllers
             {
                 return NotFound();
             }
-            //DonationI donationI = new DonationI();
-
-            ////total = 0;
-            //for (int i = 1; i <= _context.DonationIs.Count(); i++)
-            //{
-            //    if (donationI.CampaignId == id)
-            //    {
-            //        total = donationI.DonationAmount + total;
-            //    }
-            //}
-            //ViewBag.Total = total;
-
+           
             var campaign = await _context.Campaigns
                 .Include(c => c.CampaignCategory)
                 .FirstOrDefaultAsync(m => m.CamaignId == id);

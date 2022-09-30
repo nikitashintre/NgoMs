@@ -43,7 +43,9 @@ namespace Ngo.Areas.Events.Controllers
                                           .ToListAsync();
             var total = 0;
             //Calculate total of Donation Amount
-            total = await _context.DonationIs.Where(d => d.CampaignId == filterCategoryId).Include(b => b.Campaign).SumAsync(d => d.DonationAmount);
+            total = await _context.DonationIs.Where(d => d.CampaignId == filterCategoryId)
+                                   .Include(b => b.Campaign)
+                                   .SumAsync(d => d.DonationAmount);
             ViewBag.DonationAmount = total;
             return View(viewName: "Index", model: viewmodel);
         }

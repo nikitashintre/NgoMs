@@ -8,6 +8,9 @@ namespace Ngo.Models
 {
     public class Volunteer
     {
+        /// <summary>
+        /// Primary key attribute for Volunteer
+        /// </summary>
         [Key]                                                       //Primary Key
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]       //Identity Auto generated
         public int VolunteerId { get; set; }
@@ -27,6 +30,7 @@ namespace Ngo.Models
         public string Email { get; set; } = "";
 
         [Required(ErrorMessage = "Mobile is required")]
+        [Display(Name ="Mobile")]
         [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
         public string Mobile { get; set; }
 

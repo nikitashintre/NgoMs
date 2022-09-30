@@ -30,12 +30,14 @@ namespace Ngo.Models
         public string Email { get; set; } = "";
 
         [Required(ErrorMessage = "Mobile is required")]
+        [Display(Name ="Mobile Number")]
         [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
         public string Mobile { get; set; }
         /// <summary>
         /// Donation amount must be greater than 500
         /// </summary>
         [Required]
+        [Display(Name ="Donation Amount")]
         [Range(500, int.MaxValue, ErrorMessage = "Please enter a amount grater than or equal to {1}")]
         public int DonationAmount { get; set; }
 

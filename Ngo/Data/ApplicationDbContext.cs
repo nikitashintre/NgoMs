@@ -12,8 +12,8 @@ namespace Ngo.Data
         {
         }
 
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Donar> Donars { get; set; }    
+        //public DbSet<Event> Events { get; set; }
+        //public DbSet<Donar> Donars { get; set; }    
         public DbSet<CampaignCategory> CampaignCategories { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<DonationI> DonationIs { get; set; }

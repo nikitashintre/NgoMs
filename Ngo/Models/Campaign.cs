@@ -32,7 +32,9 @@ namespace Ngo.Models
         public string ImageUrl { get; set; }
         #region Navigation Properties to the Master Model - CampaignCategory
 
-
+        /// <summary>
+        /// Foreign Key relationship with CampaignCategory Model
+        /// </summary>
         [Required]
 
         [Display(Name = "Select The Campaign Category")]
